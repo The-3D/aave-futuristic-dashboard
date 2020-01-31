@@ -10,6 +10,10 @@
     "@types/node": "^12.12.26",
     "@types/react": "^16.9.19",
     "@types/react-dom": "^16.9.5",
+    "easy-pie-chart": "^2.1.7",
+    "jquery": "^3.4.1",
+    "jquery-countto": "^1.2.0",
+    "jquery.appear": "^1.0.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-scripts": "3.3.1",
@@ -35,5 +39,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/jquery": "^3.3.31"
   }
 }
