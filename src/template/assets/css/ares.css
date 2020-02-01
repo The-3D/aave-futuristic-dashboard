@@ -12,7 +12,7 @@ body {
     color: #e8f4ff;
     font-family: 'Open Sans', sans-serif;
     font-size: 13px;
-    background-image: url(../img/bg_ares.jpg);
+    background-image: url(../img/bg_black.jpg);
     background-size: cover;
     background-attachment: fixed;
     background-repeat: no-repeat;
@@ -229,9 +229,9 @@ a.link-sf:active:before {
 .circles {
     position: relative;
     left: 50%;
-    margin-left: -340px;
-    width: 680px;
-    height: 680px;
+    margin-left: -360px;
+    width: 720px;
+    height: 720px;
 }
 
 .circle {
@@ -248,56 +248,77 @@ a.link-sf:active:before {
     transform: translate(-50%, -50%);
     text-align: center;
     font-weight: 200;
-    font-size: 48px;
     line-height: normal;
     color: #fff;
+
+
 }
 
+.circles-content-market-size{
+    font-size: 48px;
+ }
+
+.circles-content-market-size-title{
+    font-size: 16px;
+    font-weight: lighter;
+
+ }
+ 
+ .circles-content-other{
+    font-size: 28px;
+ }
+
+ .circles-content-other-title{
+    font-size: 11px;
+    font-weight: lighter;
+ }
+
+
 .circle-0 {
-    width: 52%;
-    height: 52%;
-    top: 24%;
-    left: 24%;
+    width: 56%;
+    height: 56%;
+    top: 22%;
+    left: 22%;
     background: rgba(98, 208, 240, .02) url(../img/bg_circle_0.png) center center no-repeat;
     -webkit-animation: spin 80s infinite linear;
     animation: spin 80s infinite linear;
 }
 
 .circle-1 {
-    width: 56%;
-    height: 56%;
-    top: 22%;
-    left: 22%;
+    width: 60%;
+    height: 60%;
+    top: 20%;
+    left: 20%;
     border: 20px groove rgba(98, 208, 240, .1);
     -webkit-animation: spin-inverse 40s infinite linear;
     animation: spin-inverse 40s infinite linear;
 }
 
 .circle-2 {
-    width: 64%;
-    height: 64%;
-    top: 18%;
-    left: 18%;
+    width: 68%;
+    height: 68%;
+    top: 16%;
+    left: 16%;
     border: 6px dotted rgba(255, 255, 255, .05);
     -webkit-animation: spin 100s infinite linear;
     animation: spin 100s infinite linear;
 }
 
 .circle-3 {
-    width: 72%;
-    height: 72%;
-    top: 14%;
-    left: 14%;
+    width: 78%;
+    height: 78%;
+    top: 11%;
+    left: 11%;
     border: 10px double rgba(255, 255, 255, .5);
     -webkit-animation: spin 30s infinite linear;
     animation: spin 30s infinite linear;
 }
 
 .circle-4 {
-    width: 76%;
-    height: 76%;
-    top: 12%;
-    left: 12%;
+    width: 82%;
+    height: 82%;
+    top: 9%;
+    left: 9%;
     border: 4px dotted rgba(98, 208, 240, .5);
     -webkit-animation: spin-inverse 60s infinite linear;
     animation: spin-inverse 60s infinite linear;

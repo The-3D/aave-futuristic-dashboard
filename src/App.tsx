@@ -4,6 +4,8 @@ import "./template/assets/css/animate.min.css";
 import "./template/assets/css/ares.css";
 import "./template/assets/css/bootstrap.min.css";
 import $ from "jquery";
+import CountUp from 'react-countup'
+import ListBlock from "./components/ListBlock";
 
 const appear = require("jquery.appear");
 const countTo = require("jquery-countto");
@@ -13,7 +15,7 @@ const App = () => {
   useEffect(() => {
     var lHtml = $("html");
 
-    $('[data-toggle="appear"]').each(function() {
+    $('[data-toggle="appear"]').each(function () {
       var windowW =
         window.innerWidth ||
         document.documentElement.clientWidth ||
@@ -25,12 +27,12 @@ const App = () => {
         lHtml.hasClass("ie9") || windowW < 992
           ? 0
           : el.data("timeout")
-          ? el.data("timeout")
-          : 0;
+            ? el.data("timeout")
+            : 0;
 
       el.appear(
-        function() {
-          setTimeout(function() {
+        function () {
+          setTimeout(function () {
             el.removeClass("visibility-hidden").addClass(elClass);
           }, timeout);
         },
@@ -38,49 +40,34 @@ const App = () => {
       );
     });
 
-    $('[data-toggle="countTo"]').each(function() {
-      var el: any = $(this);
-      var after = el.data("after");
-      var before = el.data("before");
-      var speed = el.data("speed") ? el.data("speed") : 1500;
-      var interval = el.data("interval") ? el.data("interval") : 15;
-
-      el.appear(function() {
-        el.countTo({
-          speed: speed,
-          refreshInterval: interval,
-          onComplete: function() {
-            if (after) {
-              el.html(el.html() + after);
-            } else if (before) {
-              el.html(before + el.html());
-            }
-          }
-        });
-      });
-    });
-
   });
   return (
     <div className="App">
       <div id="page-container" className="modern-sf">
         <header id="page-header">
-          <div className="h3 text-right pull-right hidden-xs">
-            <div className="text-crystal font-w300">USER_LOGGED_IN</div>
+          <div className="h1 text-right pull-right hidden-xs">
             <div className="text-success animated infinite pulse pull-right">
               [LIVE]
             </div>
           </div>
           <h1 className="h3 font-w200">
-            <span className="text-crystal">//</span>{" "}
-            <a className="link-sf font-w300" href="index.html">
-              ARES_DASHBOARD
-            </a>
+            <div style={{ display: "flex", flexDirection: "row" }}>
+              <div>
+                <div style={{ marginTop: 12, marginLeft: 5 }} className="text-crystal font-w300">DASHBOARD</div>
+              </div>
+            </div>
           </h1>
         </header>
         <main id="page-main">
           <div className="row">
             <div className="col-lg-6 col-lg-push-3 overflow-hidden push-20">
+              <div className="row">
+                <div style={{textAlign:"center", marginBottom:80}}>
+                  <a className="link-sf font-w300" href="https://aave.com" target="_blank">
+                    <img src={require("./template/assets/img/aaveLogo.svg")} width={220} />
+                  </a>
+                </div>
+              </div>
               <div className="circles push-50">
                 <div
                   className="visibility-hidden"
@@ -159,13 +146,23 @@ const App = () => {
                   data-className="animated fadeIn"
                   data-timeout="100"
                 >
-                  <span
-                    data-toggle="countTo"
-                    data-to="16540"
-                    data-speed="60000"
-                  ></span>
+                  <span className="circles-content-market-size-title">MARKET SIZE</span><br />
+                  <CountUp end={7360841} separator=" " className="circles-content-market-size" ></CountUp>
+                  <span style={{ fontSize: 36, marginLeft: 5 }} className="text-crystal">USD</span>
                   <br />
-                  <span className="text-crystal">USD</span>
+                  <br />
+                  <span style={{ fontWeight: "lighter", fontSize: 12 }}>TOTAL VALUE LOCKED</span><br />
+                  <CountUp end={5671440} separator=" " className="circles-content-other" ></CountUp>
+                  <span style={{ fontSize: 30, marginLeft: 5 }} className="text-crystal">USD</span><br />
+                  <br />
+                  <br />
+
+
+                  <span style={{ fontWeight: "lighter", fontSize: 12 }}>TOTAL BORROWED</span><br />
+                  <CountUp end={1805306} separator=" " className="circles-content-other" ></CountUp>
+                  <span style={{ fontSize: 30, marginLeft: 5 }} className="text-crystal">USD</span>
+
+
                 </span>
               </div>
               <div className="row">
@@ -176,7 +173,7 @@ const App = () => {
                   data-timeout="100"
                 >
                   <button className="btn btn-xl btn-block btn-sf push-10">
-                    DATA_DRIVE
+                    MOST LIQUID STABLECOIN
                   </button>
                 </div>
                 <div
@@ -186,7 +183,7 @@ const App = () => {
                   data-timeout="100"
                 >
                   <button className="btn btn-xl btn-block btn-sf push-10">
-                    PO_DATABASE
+                    MOST LIQUID TOKEN
                   </button>
                 </div>
                 <div
@@ -196,9 +193,9 @@ const App = () => {
                   data-timeout="500"
                 >
                   <button className="btn btn-xl btn-block btn-sf">
-                    ACTIVE_ROUTE
+
                   </button>
-                </div>
+                </div> 
                 <div
                   className="col-xs-6 visibility-hidden"
                   data-toggle="appear"
@@ -212,227 +209,9 @@ const App = () => {
               </div>
             </div>
             <div className="col-sm-6 col-lg-3 col-lg-pull-6">
-              <div className="block">
-                <div className="block-header overflow-hidden">
-                  <h2
-                    className="block-title visibility-hidden"
-                    data-toggle="appear"
-                    data-className="animated fadeInDown"
-                  >
-                    Environment
-                  </h2>
-                </div>
-                <div className="block-content">
-                  <div className="row items-push overflow-hidden">
-                    <div
-                      className="col-xs-4 text-center visibility-hidden"
-                      data-toggle="appear"
-                      data-className="animated fadeInLeft"
-                      data-timeout="100"
-                    >
-                      <div
-                        className="js-pie-chart pie-chart"
-                        data-percent="50"
-                        data-line-width="5"
-                        data-size="65"
-                        data-bar-color="rgba(255, 255, 255, .2)"
-                        data-track-color="rgba(255, 255, 255, .1)"
-                      >
-                        <span className="font-s16 font-w600">PSI</span>
-                      </div>
-                    </div>
-                    <div
-                      className="col-xs-8 visibility-hidden"
-                      data-toggle="appear"
-                      data-className="animated fadeInRight"
-                      data-timeout="400"
-                    >
-                      <div className="text-uppercase font-w600 text-white-op">
-                        Pressure
-                      </div>
-                      <div className="font-s36 font-w300">15.65</div>
-                    </div>
-                  </div>
-                  <div className="row items-push overflow-hidden">
-                    <div
-                      className="col-xs-4 text-center visibility-hidden"
-                      data-toggle="appear"
-                      data-className="animated fadeInLeft"
-                      data-timeout="200"
-                    >
-                      <div
-                        className="js-pie-chart pie-chart"
-                        data-percent="29"
-                        data-line-width="5"
-                        data-size="65"
-                        data-bar-color="rgba(255, 255, 255, .2)"
-                        data-track-color="rgba(255, 255, 255, .1)"
-                      >
-                        <span className="font-s16 font-w600">%</span>
-                      </div>
-                    </div>
-                    <div
-                      className="col-xs-8 visibility-hidden"
-                      data-toggle="appear"
-                      data-className="animated fadeInRight"
-                      data-timeout="500"
-                    >
-                      <div className="text-uppercase font-w600 text-white-op">
-                        Oxygen
-                      </div>
-                      <div className="font-s36 font-w300">29.15</div>
-                    </div>
-                  </div>
-                  <div className="row items-push overflow-hidden">
-                    <div
-                      className="col-xs-4 text-center visibility-hidden"
-                      data-toggle="appear"
-                      data-className="animated fadeInLeft"
-                      data-timeout="300"
-                    >
-                      <div
-                        className="js-pie-chart pie-chart"
-                        data-percent="60"
-                        data-line-width="5"
-                        data-size="65"
-                        data-bar-color="rgba(255, 255, 255, .2)"
-                        data-track-color="rgba(255, 255, 255, .1)"
-                      >
-                        <span className="font-s16 font-w600">C&deg;</span>
-                      </div>
-                    </div>
-                    <div
-                      className="col-xs-8 visibility-hidden"
-                      data-toggle="appear"
-                      data-className="animated fadeInRight"
-                      data-timeout="600"
-                    >
-                      <div className="text-uppercase font-w600 text-white-op">
-                        Temperature
-                      </div>
-                      <div className="font-s36 font-w300">5.3</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="block">
-                <div className="block-header overflow-hidden">
-                  <h2
-                    className="block-title visibility-hidden"
-                    data-toggle="appear"
-                    data-className="animated fadeInDown"
-                  >
-                    Planets
-                  </h2>
-                </div>
-                <div className="block-content">
-                  <div className="row items-push overflow-hidden">
-                    <div
-                      className="col-xs-4 text-center visibility-hidden"
-                      data-toggle="appear"
-                      data-className="animated fadeInLeft"
-                      data-timeout="100"
-                    >
-                      <div
-                        className="js-pie-chart pie-chart"
-                        data-percent="100"
-                        data-line-width="20"
-                        data-size="45"
-                        data-bar-color="rgba(255, 255, 255, .2)"
-                        data-track-color="#c07635"
-                      >
-                        <span className="font-s16 font-w600"></span>
-                      </div>
-                    </div>
-                    <div
-                      className="col-xs-8 visibility-hidden"
-                      data-toggle="appear"
-                      data-className="animated fadeInRight"
-                      data-timeout="400"
-                    >
-                      <div className="text-uppercase font-w600 text-white-op">
-                        Mars
-                      </div>
-                      <div className="font-s36 font-w300">
-                        1.67{" "}
-                        <span className="font-s16 font-w400 text-crystal">
-                          L.Y.
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="row items-push overflow-hidden">
-                    <div
-                      className="col-xs-4 text-center visibility-hidden"
-                      data-toggle="appear"
-                      data-className="animated fadeInLeft"
-                      data-timeout="200"
-                    >
-                      <div
-                        className="js-pie-chart pie-chart"
-                        data-percent="100"
-                        data-line-width="22"
-                        data-size="50"
-                        data-bar-color="rgba(255, 255, 255, .2)"
-                        data-track-color="#3673cc"
-                      >
-                        <span className="font-s16 font-w600"></span>
-                      </div>
-                    </div>
-                    <div
-                      className="col-xs-8 visibility-hidden"
-                      data-toggle="appear"
-                      data-className="animated fadeInRight"
-                      data-timeout="500"
-                    >
-                      <div className="text-uppercase font-w600 text-white-op">
-                        Earth
-                      </div>
-                      <div className="font-s36 font-w300">
-                        1.62{" "}
-                        <span className="font-s16 font-w400 text-crystal">
-                          L.Y.
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="row items-push overflow-hidden">
-                    <div
-                      className="col-xs-4 text-center visibility-hidden"
-                      data-toggle="appear"
-                      data-className="animated fadeInLeft"
-                      data-timeout="300"
-                    >
-                      <div
-                        className="js-pie-chart pie-chart"
-                        data-percent="100"
-                        data-line-width="30"
-                        data-size="70"
-                        data-bar-color="rgba(255, 255, 255, .2)"
-                        data-track-color="#f7c880"
-                      >
-                        <span className="font-s16 font-w600"></span>
-                      </div>
-                    </div>
-                    <div
-                      className="col-xs-8 visibility-hidden"
-                      data-toggle="appear"
-                      data-className="animated fadeInRight"
-                      data-timeout="600"
-                    >
-                      <div className="text-uppercase font-w600 text-white-op">
-                        Saturn
-                      </div>
-                      <div className="font-s36 font-w300">
-                        2.22{" "}
-                        <span className="font-s16 font-w400 text-crystal">
-                          L.Y.
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <ListBlock title="BORROWS" data={[{date: "01/21/2020", content:"1 200,43 LINK", logo: "link"}, {date: "01/21/2020", content:"1 000,43 DAI", logo: "dai"}]} />
+              <ListBlock title="DEPOSITS" data={[{date: "01/21/2020", content:"1 200,43 LINK", logo: "link"}, {date: "01/21/2020", content:"1 000,43 DAI", logo: "dai"}]} />
+
             </div>
             <div className="col-sm-6 col-lg-3">
               <div className="block">
