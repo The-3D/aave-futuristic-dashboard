@@ -82,7 +82,7 @@ const App = () => {
           <div className="row">
             <div className="col-lg-6 col-lg-push-3 overflow-hidden push-20">
               <div className="row">
-                <div style={{ textAlign: "center", marginBottom: 80 }}>
+                <div style={{ textAlign: "center", marginBottom: 20 }}>
                   <a className="link-sf font-w300" href="https://aave.com" target="_blank">
                     <img src={require("./template/assets/img/aaveLogo.svg")} width={220} />
                   </a>
@@ -101,7 +101,7 @@ const App = () => {
                   className="visibility-hidden"
                   data-toggle="appear"
                   data-className="animated fadeIn"
-                  data-timeout="100"
+                  data-timeout="300"
                 >
                   <span className="circle circle-1"></span>
                 </div>
@@ -109,7 +109,7 @@ const App = () => {
                   className="visibility-hidden"
                   data-toggle="appear"
                   data-className="animated fadeIn"
-                  data-timeout="200"
+                  data-timeout="500"
                 >
                   <span className="circle circle-2"></span>
                 </div>
@@ -117,7 +117,7 @@ const App = () => {
                   className="visibility-hidden"
                   data-toggle="appear"
                   data-className="animated fadeIn"
-                  data-timeout="300"
+                  data-timeout="700"
                 >
                   <span className="circle circle-3"></span>
                 </div>
@@ -125,7 +125,7 @@ const App = () => {
                   className="visibility-hidden"
                   data-toggle="appear"
                   data-className="animated fadeIn"
-                  data-timeout="400"
+                  data-timeout="800"
                 >
                   <span className="circle circle-4"></span>
                 </div>
@@ -133,7 +133,7 @@ const App = () => {
                   className="visibility-hidden"
                   data-toggle="appear"
                   data-className="animated fadeIn"
-                  data-timeout="500"
+                  data-timeout="1000"
                 >
                   <span className="circle circle-5"></span>
                 </div>
@@ -141,7 +141,7 @@ const App = () => {
                   className="visibility-hidden"
                   data-toggle="appear"
                   data-className="animated fadeIn"
-                  data-timeout="600"
+                  data-timeout="1100"
                 >
                   <span className="circle circle-6"></span>
                 </div>
@@ -149,8 +149,9 @@ const App = () => {
                   className="visibility-hidden"
                   data-toggle="appear"
                   data-className="animated fadeIn"
-                  data-timeout="800"
+                  data-timeout="1200"
                 >
+                  <span>UNIQUE USERS</span>
                   <span className="circle circle-over-1 hidden-xs">
                     <CountUp end={445} separator=" "  ></CountUp>
 
@@ -183,52 +184,56 @@ const App = () => {
 
                 </span>
               </div>
-              <div className="row">
-                <div
-                  className="col-xs-6 visibility-hidden"
-                  data-toggle="appear"
-                  data-className="animated fadeInLeft"
-                  data-timeout="100"
-                >
-                  <button className="btn btn-xl btn-block btn-sf push-10">
-                    MOST LIQUID STABLECOIN
-                  </button>
-                </div>
-                <div
-                  className="col-xs-6 visibility-hidden"
-                  data-toggle="appear"
-                  data-className="animated fadeInRight"
-                  data-timeout="100"
-                >
-                  <button className="btn btn-xl btn-block btn-sf push-10">
-                    MOST LIQUID TOKEN
-                  </button>
-                </div>
-                <div
-                  className="col-xs-6 visibility-hidden"
-                  data-toggle="appear"
-                  data-className="animated fadeInLeft"
-                  data-timeout="500"
-                >
-                  <button className="btn btn-xl btn-block btn-sf">
+              {/*
+            <div className="row">
+            <div
+              className="col-xs-6 visibility-hidden"
+              data-toggle="appear"
+              data-className="animated fadeInLeft"
+              data-timeout="100"
+            >
+              <button className="btn btn-xl btn-block btn-sf push-10">
+                MOST LIQUID STABLECOIN
+              </button>
+            </div>
+            <div
+              className="col-xs-6 visibility-hidden"
+              data-toggle="appear"
+              data-className="animated fadeInRight"
+              data-timeout="100"
+            >
+              <button className="btn btn-xl btn-block btn-sf push-10">
+                MOST LIQUID TOKEN
+              </button>
+            </div>
+            <div
+              className="col-xs-6 visibility-hidden"
+              data-toggle="appear"
+              data-className="animated fadeInLeft"
+              data-timeout="500"
+            >
+              <button className="btn btn-xl btn-block btn-sf">
 
-                  </button>
-                </div>
-                <div
-                  className="col-xs-6 visibility-hidden"
-                  data-toggle="appear"
-                  data-className="animated fadeInRight"
-                  data-timeout="500"
-                >
-                  <button className="btn btn-xl btn-block btn-sf">
-                    AUTO_PILOT
-                  </button>
-                </div>
-              </div>
+              </button>
+            </div>
+            <div
+              className="col-xs-6 visibility-hidden"
+              data-toggle="appear"
+              data-className="animated fadeInRight"
+              data-timeout="500"
+            >
+              <button className="btn btn-xl btn-block btn-sf">
+                AUTO_PILOT
+              </button>
+            </div>
+          </div>
+        
+
+*/ }
             </div>
             <div className="col-sm-6 col-lg-3 col-lg-pull-6">
               {
-              borrowsLoading ? null : <ListBlock title="BORROWS" data={borrowsData.borrows.map((item: any) => { return { date: item.timestamp, content: item.amount, logo: item.reserve.symbol.toLowerCase() } })} />
+                borrowsLoading ? null : <ListBlock title="BORROWS" data={borrowsData.borrows.map((item: any) => { return { date: item.timestamp, content: item.amount, logo: item.reserve.symbol.toLowerCase() } })} />
 
               }
               <ListBlock title="DEPOSITS" data={[{ date: "01/21/2020", content: "1 200,43 LINK", logo: "link" }, { date: "01/21/2020", content: "1 000,43 DAI", logo: "dai" }]} />
