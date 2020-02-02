@@ -151,7 +151,6 @@ const App = () => {
                   data-className="animated fadeIn"
                   data-timeout="1200"
                 >
-                  <span>UNIQUE USERS</span>
                   <span className="circle circle-over-1 hidden-xs">
                     <CountUp end={445} separator=" "  ></CountUp>
 
