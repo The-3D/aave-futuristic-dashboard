@@ -183,10 +183,11 @@ a.link-sf:active:before {
     margin-bottom: 20px;
     background-color: rgba(0, 0, 0, .15);
     border-left: 4px solid rgba(255, 255, 255, .1);
+    padding-bottom: 20px;
 }
 
 .block-header {
-    padding: 5px 5px 5px;
+    padding: 5px 20px 5px;
 }
 
 .block-header:before,
@@ -473,7 +474,7 @@ a.link-sf:active:before {
 .push-40 { margin-bottom: 40px; }
 .push-50 { margin-bottom: 50px; }
 
-.items-push > div { margin-bottom: 30px; }
+.items-push > div { margin-bottom: 0px; }
 
 .overflow-hidden { overflow: hidden; }
 .visibility-hidden { visibility: hidden; }

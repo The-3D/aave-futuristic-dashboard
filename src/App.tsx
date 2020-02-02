@@ -6,12 +6,32 @@ import "./template/assets/css/bootstrap.min.css";
 import $ from "jquery";
 import CountUp from 'react-countup'
 import ListBlock from "./components/ListBlock";
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
+import { useQuery } from '@apollo/react-hooks';
 
 const appear = require("jquery.appear");
 const countTo = require("jquery-countto");
 const easyPieChart = require("easy-pie-chart").easyPieChart;
 
+const borrowsQuery = gql`
+   {
+      borrows(orderBy: timestamp, first: 25){
+        id
+        amount
+        reserve{symbol}
+        borrowRate
+        borrowRateMode
+        timestamp
+      }
+    }  
+`;
+
 const App = () => {
+
+  const { loading: borrowsLoading, error: borrowsError, data: borrowsData } = useQuery(borrowsQuery)
+
+  console.log(borrowsError, borrowsData, borrowsLoading)
   useEffect(() => {
     var lHtml = $("html");
 
@@ -62,10 +82,11 @@ const App = () => {
           <div className="row">
             <div className="col-lg-6 col-lg-push-3 overflow-hidden push-20">
               <div className="row">
-                <div style={{textAlign:"center", marginBottom:80}}>
+                <div style={{ textAlign: "center", marginBottom: 80 }}>
                   <a className="link-sf font-w300" href="https://aave.com" target="_blank">
                     <img src={require("./template/assets/img/aaveLogo.svg")} width={220} />
                   </a>
+                  <div style={{ marginTop: 14, marginLeft: 5 }} className="text-crystal font-w300">DEPOSIT. EARN. CONTROL. INNOVATE.</div>
                 </div>
               </div>
               <div className="circles push-50">
@@ -131,11 +152,8 @@ const App = () => {
                   data-timeout="800"
                 >
                   <span className="circle circle-over-1 hidden-xs">
-                    <span
-                      data-toggle="countTo"
-                      data-to="798"
-                      data-speed="100000"
-                    ></span>
+                    <CountUp end={445} separator=" "  ></CountUp>
+
                   </span>
                   <span className="circle circle-over-2 hidden-xs"></span>
                   <span className="circle circle-over-3 hidden-xs"></span>
@@ -153,14 +171,14 @@ const App = () => {
                   <br />
                   <span style={{ fontWeight: "lighter", fontSize: 12 }}>TOTAL VALUE LOCKED</span><br />
                   <CountUp end={5671440} separator=" " className="circles-content-other" ></CountUp>
-                  <span style={{ fontSize: 30, marginLeft: 5 }} className="text-crystal">USD</span><br />
+                  <span style={{ fontSize: 24, marginLeft: 5 }} className="text-crystal">USD</span><br />
                   <br />
                   <br />
 
 
                   <span style={{ fontWeight: "lighter", fontSize: 12 }}>TOTAL BORROWED</span><br />
                   <CountUp end={1805306} separator=" " className="circles-content-other" ></CountUp>
-                  <span style={{ fontSize: 30, marginLeft: 5 }} className="text-crystal">USD</span>
+                  <span style={{ fontSize: 24, marginLeft: 5 }} className="text-crystal">USD</span>
 
 
                 </span>
@@ -195,7 +213,7 @@ const App = () => {
                   <button className="btn btn-xl btn-block btn-sf">
 
                   </button>
-                </div> 
+                </div>
                 <div
                   className="col-xs-6 visibility-hidden"
                   data-toggle="appear"
@@ -209,8 +227,12 @@ const App = () => {
               </div>
             </div>
             <div className="col-sm-6 col-lg-3 col-lg-pull-6">
-              <ListBlock title="BORROWS" data={[{date: "01/21/2020", content:"1 200,43 LINK", logo: "link"}, {date: "01/21/2020", content:"1 000,43 DAI", logo: "dai"}]} />
-              <ListBlock title="DEPOSITS" data={[{date: "01/21/2020", content:"1 200,43 LINK", logo: "link"}, {date: "01/21/2020", content:"1 000,43 DAI", logo: "dai"}]} />
+              {
+              borrowsLoading ? null : <ListBlock title="BORROWS" data={borrowsData.borrows.map((item: any) => { return { date: item.timestamp, content: item.amount, logo: item.reserve.symbol.toLowerCase() } })} />
+
+              }
+              <ListBlock title="DEPOSITS" data={[{ date: "01/21/2020", content: "1 200,43 LINK", logo: "link" }, { date: "01/21/2020", content: "1 000,43 DAI", logo: "dai" }]} />
+              <ListBlock title="LIQUIDATIONS" data={[{ date: "01/21/2020", content: "1 200,43 LINK", logo: "link" }, { date: "01/21/2020", content: "1 000,43 DAI", logo: "dai" }]} />
 
             </div>
             <div className="col-sm-6 col-lg-3">
