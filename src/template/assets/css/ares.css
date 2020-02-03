@@ -326,10 +326,10 @@ a.link-sf:active:before {
 }
 
 .circle-5 {
-    width: 94%;
-    height: 94%;
-    top: 3%;
-    left: 3%;
+    width: 93%;
+    height: 93%;
+    top: 3.5%;
+    left: 3.5%;
     border: 2px rgba(98, 208, 240, .2);
     border-style: dashed solid dashed solid;
     -webkit-animation: spin 30s infinite linear;
@@ -337,10 +337,10 @@ a.link-sf:active:before {
 }
 
 .circle-6 {
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
+    width: 98%;
+    height: 98%;
+    top: 1%;
+    left: 1%;
     border: 36px double rgba(255, 255, 255, .03);
     -webkit-animation: spin-inverse 50s infinite linear;
     animation: spin-inverse 50s infinite linear;
