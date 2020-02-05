@@ -4,38 +4,44 @@ import "./template/assets/css/animate.min.css";
 import "./template/assets/css/ares.css";
 import "./template/assets/css/bootstrap.min.css";
 import $ from "jquery";
-import CountUp from 'react-countup'
+import CountUp from "react-countup";
 import ListBlock from "./components/ListBlock";
-import { graphql } from 'react-apollo';
-import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
+import { graphql, Query } from "react-apollo";
+import gql from "graphql-tag";
+import { useQuery } from "@apollo/react-hooks";
+import BigNumber from "bignumber.js";
+import moment from "moment";
 
 const appear = require("jquery.appear");
 const countTo = require("jquery-countto");
 const easyPieChart = require("easy-pie-chart").easyPieChart;
 
+type QueryProps = {
+  loading: boolean;
+  error: string;
+  data: any;
+};
+
 const borrowsQuery = gql`
-   {
-      borrows(orderBy: timestamp, first: 25){
-        id
-        amount
-        reserve{symbol}
-        borrowRate
-        borrowRateMode
-        timestamp
+  {
+    borrows(orderBy: timestamp, orderDirection: desc, first: 10) {
+      id
+      amount
+      reserve {
+        symbol
       }
-    }  
+      borrowRate
+      borrowRateMode
+      timestamp
+    }
+  }
 `;
 
 const App = () => {
-
-  const { loading: borrowsLoading, error: borrowsError, data: borrowsData } = useQuery(borrowsQuery)
-
-  console.log(borrowsError, borrowsData, borrowsLoading)
   useEffect(() => {
     var lHtml = $("html");
 
-    $('[data-toggle="appear"]').each(function () {
+    $('[data-toggle="appear"]').each(function() {
       var windowW =
         window.innerWidth ||
         document.documentElement.clientWidth ||
@@ -47,19 +53,18 @@ const App = () => {
         lHtml.hasClass("ie9") || windowW < 992
           ? 0
           : el.data("timeout")
-            ? el.data("timeout")
-            : 0;
+          ? el.data("timeout")
+          : 0;
 
       el.appear(
-        function () {
-          setTimeout(function () {
+        function() {
+          setTimeout(function() {
             el.removeClass("visibility-hidden").addClass(elClass);
           }, timeout);
         },
         { accY: offset }
       );
     });
-
   });
   return (
     <div className="App">
@@ -73,7 +78,12 @@ const App = () => {
           <h1 className="h3 font-w200">
             <div style={{ display: "flex", flexDirection: "row" }}>
               <div>
-                <div style={{ marginTop: 12, marginLeft: 5 }} className="text-crystal font-w300">DASHBOARD</div>
+                <div
+                  style={{ marginTop: 12, marginLeft: 5 }}
+                  className="text-crystal font-w300"
+                >
+                  DASHBOARD
+                </div>
               </div>
             </div>
           </h1>
@@ -82,11 +92,23 @@ const App = () => {
           <div className="row">
             <div className="col-lg-6 col-lg-push-3 overflow-hidden push-20">
               <div className="row">
-                <div style={{ textAlign: "center", marginBottom: 20 }}>
-                  <a className="link-sf font-w300" href="https://aave.com" target="_blank">
-                    <img src={require("./template/assets/img/aaveLogo.svg")} width={220} />
+                <div style={{ textAlign: "center", marginBottom: 10 }}>
+                  <a
+                    className="link-sf font-w300"
+                    href="https://aave.com"
+                    target="_blank"
+                  >
+                    <img
+                      src={require("./template/assets/img/aaveLogo.svg")}
+                      width={170}
+                    />
                   </a>
-                  <div style={{ marginTop: 14, marginLeft: 5 }} className="text-crystal font-w300">DEPOSIT. EARN. CONTROL. INNOVATE.</div>
+                  <div
+                    style={{ marginTop: 14, marginLeft: 5 }}
+                    className="text-crystal font-w300"
+                  >
+                    DEPOSIT. EARN. CONTROL. INNOVATE.
+                  </div>
                 </div>
               </div>
               <div className="circles push-50">
@@ -152,8 +174,7 @@ const App = () => {
                   data-timeout="1200"
                 >
                   <span className="circle circle-over-1 hidden-xs">
-                    <CountUp end={445} separator=" "  ></CountUp>
-
+                    <CountUp end={445} separator=" "></CountUp>
                   </span>
                   <span className="circle circle-over-2 hidden-xs"></span>
                   <span className="circle circle-over-3 hidden-xs"></span>
@@ -164,23 +185,57 @@ const App = () => {
                   data-className="animated fadeIn"
                   data-timeout="100"
                 >
-                  <span className="circles-content-market-size-title">MARKET SIZE</span><br />
-                  <CountUp end={7360841} separator=" " className="circles-content-market-size" ></CountUp>
-                  <span style={{ fontSize: 36, marginLeft: 5 }} className="text-crystal">USD</span>
+                  <span className="circles-content-market-size-title">
+                    MARKET SIZE
+                  </span>
+                  <br />
+                  <CountUp
+                    end={7360841}
+                    separator=" "
+                    className="circles-content-market-size"
+                  ></CountUp>
+                  <span
+                    style={{ fontSize: 36, marginLeft: 5 }}
+                    className="text-crystal"
+                  >
+                    USD
+                  </span>
                   <br />
                   <br />
-                  <span style={{ fontWeight: "lighter", fontSize: 12 }}>TOTAL VALUE LOCKED</span><br />
-                  <CountUp end={5671440} separator=" " className="circles-content-other" ></CountUp>
-                  <span style={{ fontSize: 24, marginLeft: 5 }} className="text-crystal">USD</span><br />
+                  <span style={{ fontWeight: "lighter", fontSize: 12 }}>
+                    TOTAL VALUE LOCKED
+                  </span>
+                  <br />
+                  <CountUp
+                    end={5671440}
+                    separator=" "
+                    className="circles-content-other"
+                  ></CountUp>
+                  <span
+                    style={{ fontSize: 24, marginLeft: 5 }}
+                    className="text-crystal"
+                  >
+                    USD
+                  </span>
+                  <br />
                   <br />
                   <br />
 
-
-                  <span style={{ fontWeight: "lighter", fontSize: 12 }}>TOTAL BORROWED</span><br />
-                  <CountUp end={1805306} separator=" " className="circles-content-other" ></CountUp>
-                  <span style={{ fontSize: 24, marginLeft: 5 }} className="text-crystal">USD</span>
-
-
+                  <span style={{ fontWeight: "lighter", fontSize: 12 }}>
+                    TOTAL BORROWED
+                  </span>
+                  <br />
+                  <CountUp
+                    end={1805306}
+                    separator=" "
+                    className="circles-content-other"
+                  ></CountUp>
+                  <span
+                    style={{ fontSize: 24, marginLeft: 5 }}
+                    className="text-crystal"
+                  >
+                    USD
+                  </span>
                 </span>
               </div>
               {/*
@@ -228,16 +283,55 @@ const App = () => {
           </div>
         
 
-*/ }
+*/}
             </div>
             <div className="col-sm-6 col-lg-3 col-lg-pull-6">
-              {
-                borrowsLoading ? null : <ListBlock title="BORROWS" data={borrowsData.borrows.map((item: any) => { return { date: item.timestamp, content: item.amount, logo: item.reserve.symbol.toLowerCase() } })} />
+              <Query query={borrowsQuery}>
+                {({ loading, error, data }: any)  =>  {
+                  if (loading) return <div>Fetching</div>;
+                  if (error) return <div>Error</div>;
 
-              }
-              <ListBlock title="DEPOSITS" data={[{ date: "01/21/2020", content: "1 200,43 LINK", logo: "link" }, { date: "01/21/2020", content: "1 000,43 DAI", logo: "dai" }]} />
-              <ListBlock title="LIQUIDATIONS" data={[{ date: "01/21/2020", content: "1 200,43 LINK", logo: "link" }, { date: "01/21/2020", content: "1 000,43 DAI", logo: "dai" }]} />
 
+                  return (
+                    <div>
+                      {
+                        <ListBlock
+                          title="BORROWS"
+                          data={data.borrows.map((item: any) => {
+                            return {
+                              date:  moment.unix(item.timestamp).format("MM/DD/YYYY"),
+                              content: `${new BigNumber(item.amount).toFixed(2)} ${item.reserve.symbol}`,
+                              logo: item.reserve.symbol.toLowerCase()
+                            };
+                          })}
+                        />
+                      }
+                    </div>
+                  );
+                }}
+              </Query>
+              <ListBlock
+                title="DEPOSITS"
+                data={[
+                  {
+                    date: "01/21/2020",
+                    content: "1 200,43 LINK",
+                    logo: "link"
+                  },
+                  { date: "01/21/2020", content: "1 000,43 DAI", logo: "dai" }
+                ]}
+              />
+              <ListBlock
+                title="LIQUIDATIONS"
+                data={[
+                  {
+                    date: "01/21/2020",
+                    content: "1 200,43 LINK",
+                    logo: "link"
+                  },
+                  { date: "01/21/2020", content: "1 000,43 DAI", logo: "dai" }
+                ]}
+              />
             </div>
             <div className="col-sm-6 col-lg-3">
               <div className="block">

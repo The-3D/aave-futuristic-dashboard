@@ -5,6 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { ApolloProvider } from 'react-apollo';
 import { getApolloClient } from './config/apollo-client-config';
+import PoolDataProviderWrapper from './components/PoolDataProviderWrapper';
 
 
 
