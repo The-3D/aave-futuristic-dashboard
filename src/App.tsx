@@ -11,6 +11,8 @@ import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
 import BigNumber from "bignumber.js";
 import moment from "moment";
+import DepositsList from "./components/DepositsList";
+import BorrowsList from "./components/BorrowsList";
 
 const appear = require("jquery.appear");
 const countTo = require("jquery-countto");
@@ -286,52 +288,9 @@ const App = () => {
 */}
             </div>
             <div className="col-sm-6 col-lg-3 col-lg-pull-6">
-              <Query query={borrowsQuery}>
-                {({ loading, error, data }: any)  =>  {
-                  if (loading) return <div>Fetching</div>;
-                  if (error) return <div>Error</div>;
-
-
-                  return (
-                    <div>
-                      {
-                        <ListBlock
-                          title="BORROWS"
-                          data={data.borrows.map((item: any) => {
-                            return {
-                              date:  moment.unix(item.timestamp).format("MM/DD/YYYY"),
-                              content: `${new BigNumber(item.amount).toFixed(2)} ${item.reserve.symbol}`,
-                              logo: item.reserve.symbol.toLowerCase()
-                            };
-                          })}
-                        />
-                      }
-                    </div>
-                  );
-                }}
-              </Query>
-              <ListBlock
-                title="DEPOSITS"
-                data={[
-                  {
-                    date: "01/21/2020",
-                    content: "1 200,43 LINK",
-                    logo: "link"
-                  },
-                  { date: "01/21/2020", content: "1 000,43 DAI", logo: "dai" }
-                ]}
-              />
-              <ListBlock
-                title="LIQUIDATIONS"
-                data={[
-                  {
-                    date: "01/21/2020",
-                    content: "1 200,43 LINK",
-                    logo: "link"
-                  },
-                  { date: "01/21/2020", content: "1 000,43 DAI", logo: "dai" }
-                ]}
-              />
+             <BorrowsList />
+             <DepositsList />
+             
             </div>
             <div className="col-sm-6 col-lg-3">
               <div className="block">

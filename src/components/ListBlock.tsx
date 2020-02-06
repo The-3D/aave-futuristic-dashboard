@@ -1,17 +1,12 @@
-import React, { useEffect } from 'react'
-import $ from 'jquery'
+import React, { useEffect, Children } from 'react'
 
-export interface ListBlockElement {
-    date: string
-    content: string
-    logo: string
-}
 
 type ListBlockProps = {
     title: string,
-    data: ListBlockElement[]
+    children?: any
 }
-const ListBlock = ({title,data}: ListBlockProps) => {
+
+const ListBlock = ({title, children}: ListBlockProps) => {
 
 
     return (
@@ -26,31 +21,7 @@ const ListBlock = ({title,data}: ListBlockProps) => {
                 </h2>
             </div>
             <div className="block-content">
-                {
-                    data.map((item, index) => {
-
-                        return (<div className="row items-push overflow-hidden animated fadeInLeft" data-toggle="appear" data-timeout={index*100}>
-                            <div
-                                className="col-xs-4"
-                            >
-                                {item.date}
-                            </div>
-                            <div className="col-xs-4">
-                                <div className="text-uppercase font-w600 text-white-op">
-                                    {item.content}
-                                  </div>
-                            </div>
-                            <div className="col-xs-4">
-                                <div className="text-uppercase font-w600 text-white-op">
-                                    <img src={require(`../template/assets/img/${item.logo}.svg`)} width={12}/>
-                                  </div>
-                            </div>
- 
-                        </div>)
-
-
-                    })
-                }
+               {children}
             </div>
         </div>
 
