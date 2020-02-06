@@ -16,16 +16,16 @@ const ListBlockItem = ({item, index} : ListBlockItemProps) => {
 
     return (<div className="row items-push overflow-hidden animated fadeInLeft" data-toggle="appear" data-timeout={index*100}>
     <div
-        className="col-xs-4"
+        className="col-xs-3"
     >
         {item.date}
     </div>
-    <div className="col-xs-4">
+    <div className="col-xs-7">
         <div className="text-uppercase font-w600 text-white-op">
             {item.content}
           </div>
     </div>
-    <div className="col-xs-4">
+    <div className="col-xs-1">
         <div className="text-uppercase font-w600 text-white-op">
             <img src={item.logo} width={12}/>
           </div>

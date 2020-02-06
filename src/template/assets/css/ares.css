@@ -175,7 +175,7 @@ a.link-sf:active:before {
 }
 
 #page-main {
-    padding: 50px 20px 1px;
+    padding: 30px 20px 1px;
 }
 
 /* Blocks */
@@ -211,7 +211,7 @@ a.link-sf:active:before {
 
 .block-content {
     margin: 0 auto;
-    padding: 20px 20px 1px;
+    padding: 10px 20px 1px;
     max-width: 100%;
     overflow-x: visible;
 }

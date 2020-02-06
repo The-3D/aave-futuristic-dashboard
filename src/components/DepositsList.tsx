@@ -26,7 +26,7 @@ const DepositsList = () => {
     <ListBlock title="LAST DEPOSITS">
       <Query query={depositsQuery}>
         {({ loading, error, data }: any) => {
-          if (loading) return <div style={{textAlign:"center"}}><Loader type="Audio" color="#FFFFFF"></Loader></div>;
+          if (loading) return <div style={{textAlign:"center"}}><Loader type="Oval" color="#FFFFFF" width={32}></Loader></div>;
           if (error) return <div>Error</div>;
 
           return data.deposits.map((item: any, index: number) => {

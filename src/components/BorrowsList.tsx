@@ -32,7 +32,7 @@ const BorrowsList = () => {
           if (loading)
             return (
               <div style={{ textAlign: "center" }}>
-                <Loader type="Audio" color="#FFFFFF" width={32}></Loader>
+                <Loader type="Oval" color="#FFFFFF" width={32}></Loader>
               </div>
             );
           if (error) return <div>Error</div>;
