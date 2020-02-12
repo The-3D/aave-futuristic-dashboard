@@ -97,7 +97,7 @@ const App = () => {
           <div className="row">
             <div className="col-lg-6 col-lg-push-3 overflow-hidden push-20">
               <div className="row">
-                <div style={{ textAlign: "center", marginBottom: 10 }}>
+                <div style={{ textAlign: "center", marginBottom: 60 }}>
                   <a
                     className="link-sf font-w300"
                     href="https://aave.com"
@@ -105,7 +105,7 @@ const App = () => {
                   >
                     <img
                       src={require("./template/assets/img/aaveLogo.svg")}
-                      width={170}
+                      width={220}
                     />
                   </a>
                   <div

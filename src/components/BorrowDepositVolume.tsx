@@ -230,7 +230,7 @@ const BorrowDepositVolume = () => {
               </div>
               <div className="block-content overflow-hidden">
                 <FlexibleWidthXYPlot height={200} yDomain={[0, maxDeposits.plus(maxDeposits.times(0.15)).toNumber()]}>
-                  <VerticalBarSeries data={depositsSeries} />
+                  <VerticalBarSeries data={depositsSeries} color={"#337ab7"} />
                   <LabelSeries animation allowOffsetToBeReversed data={depositsSeries} />
                 </FlexibleWidthXYPlot>
               </div>
