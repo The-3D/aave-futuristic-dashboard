@@ -28,6 +28,10 @@ const GlobalMarketData = () => {
       {({ loading, error, data }: any) => {
         let dataToRender: any = null;
 
+        if (error) {
+          console.log(error)
+          return null;
+        }
         if (!loading) {
           const ethUsdPrice = data.priceOracle.usdPriceEth;
 

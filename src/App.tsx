@@ -15,7 +15,7 @@ import DepositsList from "./components/DepositsList";
 import BorrowsList from "./components/BorrowsList";
 import LiquidationsList from "./components/LiquidationsList";
 import GlobalMarketData from "./components/GlobalMarketData";
-import BorrowVolume from "./components/BorrowVolume";
+import BorrowVolume from "./components/BorrowDepositVolume";
 
 const appear = require("jquery.appear");
 const countTo = require("jquery-countto");
