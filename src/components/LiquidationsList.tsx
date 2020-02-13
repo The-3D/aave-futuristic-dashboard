@@ -1,6 +1,6 @@
 import React from "react";
 import ListBlockItem from "./ListBlockItem";
-import ListBlock from "./ListBlock";
+import Block from "./Block";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
 import Loader from "react-loader-spinner";
@@ -26,7 +26,7 @@ const liquidationCallsQuery = gql`
 
 const LiquidationsList = () => {
   return (
-    <ListBlock title="LAST LIQUIDATIONS">
+    <Block title="LAST LIQUIDATIONS">
       <Query query={liquidationCallsQuery}>
         {({ loading, error, data }: any) => {
           if (loading)
@@ -65,7 +65,7 @@ const LiquidationsList = () => {
           });
         }}
       </Query>
-    </ListBlock>
+    </Block>
   );
 };
 

@@ -1,12 +1,12 @@
 import React, { useEffect, Children } from 'react'
 
 
-type ListBlockProps = {
+type BlockProps = {
     title: string,
     children?: any
 }
 
-const ListBlock = ({title, children}: ListBlockProps) => {
+const Block = ({title, children}: BlockProps) => {
 
 
     return (
@@ -29,4 +29,4 @@ const ListBlock = ({title, children}: ListBlockProps) => {
 
 }
 
-export default ListBlock
+export default Block

@@ -1,46 +1,19 @@
 import React, { useEffect } from "react";
-import logo from "./logo.svg";
 import "./template/assets/css/animate.min.css";
 import "./template/assets/css/ares.css";
 import "./template/assets/css/bootstrap.min.css";
 import $ from "jquery";
-import CountUp from "react-countup";
-import ListBlock from "./components/ListBlock";
-import { graphql, Query } from "react-apollo";
 import gql from "graphql-tag";
-import { useQuery } from "@apollo/react-hooks";
-import BigNumber from "bignumber.js";
-import moment from "moment";
 import DepositsList from "./components/DepositsList";
 import BorrowsList from "./components/BorrowsList";
 import LiquidationsList from "./components/LiquidationsList";
 import GlobalMarketData from "./components/GlobalMarketData";
-import BorrowVolume from "./components/BorrowDepositVolume";
+import BorrowDepositVolume from "./components/BorrowDepositVolume";
+import MostBorrowedAsset from "./components/MostBorrowedAsset";
 
 const appear = require("jquery.appear");
 const countTo = require("jquery-countto");
 const easyPieChart = require("easy-pie-chart").easyPieChart;
-
-type QueryProps = {
-  loading: boolean;
-  error: string;
-  data: any;
-};
-
-const borrowsQuery = gql`
-  {
-    borrows(orderBy: timestamp, orderDirection: desc, first: 10) {
-      id
-      amount
-      reserve {
-        symbol
-      }
-      borrowRate
-      borrowRateMode
-      timestamp
-    }
-  }
-`;
 
 const App = () => {
   useEffect(() => {
@@ -117,52 +90,7 @@ const App = () => {
                 </div>
               </div>
               <GlobalMarketData />
-              {/*
-            <div className="row">
-            <div
-              className="col-xs-6 visibility-hidden"
-              data-toggle="appear"
-              data-className="animated fadeInLeft"
-              data-timeout="100"
-            >
-              <button className="btn btn-xl btn-block btn-sf push-10">
-                MOST LIQUID STABLECOIN
-              </button>
-            </div>
-            <div
-              className="col-xs-6 visibility-hidden"
-              data-toggle="appear"
-              data-className="animated fadeInRight"
-              data-timeout="100"
-            >
-              <button className="btn btn-xl btn-block btn-sf push-10">
-                MOST LIQUID TOKEN
-              </button>
-            </div>
-            <div
-              className="col-xs-6 visibility-hidden"
-              data-toggle="appear"
-              data-className="animated fadeInLeft"
-              data-timeout="500"
-            >
-              <button className="btn btn-xl btn-block btn-sf">
 
-              </button>
-            </div>
-            <div
-              className="col-xs-6 visibility-hidden"
-              data-toggle="appear"
-              data-className="animated fadeInRight"
-              data-timeout="500"
-            >
-              <button className="btn btn-xl btn-block btn-sf">
-                AUTO_PILOT
-              </button>
-            </div>
-          </div>
-        
-
-*/}
             </div>
             <div className="col-sm-6 col-lg-3 col-lg-pull-6">
              <BorrowsList />
@@ -171,211 +99,8 @@ const App = () => {
              
             </div>
             <div className="col-sm-6 col-lg-3">
-              <BorrowVolume />
-               <div className="block">
-                <div className="block-header overflow-hidden">
-                  <h2
-                    className="block-title visibility-hidden"
-                    data-toggle="appear"
-                    data-className="animated fadeInDown"
-                  >
-                    POS_TRACKING
-                  </h2>
-                </div>
-                <div className="block-content block-content-full overflow-hidden">
-                  <div
-                    className="font-w600 text-white-op push-5 visibility-hidden"
-                    data-toggle="appear"
-                    data-className="animated fadeInRight"
-                    data-timeout="100"
-                  >
-                    X: 95
-                  </div>
-                  <div
-                    className="progress visibility-hidden"
-                    data-toggle="appear"
-                    data-className="animated fadeInLeft"
-                    data-timeout="100"
-                  >
-                    <div
-                      className="progress-bar progress-bar-sf progress-bar-striped active"
-                      role="progressbar"
-                      aria-valuenow={95}
-                      aria-valuemin={0}
-                      aria-valuemax={100}
-                      style={{ width: "95%" }}
-                    ></div>
-                  </div>
-                  <div
-                    className="font-w600 text-white-op push-5 visibility-hidden"
-                    data-toggle="appear"
-                    data-className="animated fadeInRight"
-                    data-timeout="300"
-                  >
-                    Y: 49
-                  </div>
-                  <div
-                    className="progress visibility-hidden"
-                    data-toggle="appear"
-                    data-className="animated fadeInLeft"
-                    data-timeout="300"
-                  >
-                    <div
-                      className="progress-bar progress-bar-sf progress-bar-striped active"
-                      role="progressbar"
-                      aria-valuenow={49}
-                      aria-valuemin={0}
-                      aria-valuemax={100}
-                      style={{ width: "49%" }}
-                    ></div>
-                  </div>
-                  <div
-                    className="font-w600 text-white-op push-5 visibility-hidden"
-                    data-toggle="appear"
-                    data-className="animated fadeInRight"
-                    data-timeout="500"
-                  >
-                    Z: 59
-                  </div>
-                  <div
-                    className="progress visibility-hidden"
-                    data-toggle="appear"
-                    data-className="animated fadeInLeft"
-                    data-timeout="500"
-                  >
-                    <div
-                      className="progress-bar progress-bar-sf progress-bar-striped active"
-                      role="progressbar"
-                      aria-valuenow={59}
-                      aria-valuemin={0}
-                      aria-valuemax={100}
-                      style={{ width: "59%" }}
-                    ></div>
-                  </div>
-                  <div
-                    className="font-w600 text-white-op push-5 visibility-hidden"
-                    data-toggle="appear"
-                    data-className="animated fadeInRight"
-                    data-timeout="700"
-                  >
-                    V: +60
-                  </div>
-                  <div
-                    className="progress visibility-hidden"
-                    data-toggle="appear"
-                    data-className="animated fadeInLeft"
-                    data-timeout="700"
-                  >
-                    <div
-                      className="progress-bar progress-bar-sf progress-bar-striped active"
-                      role="progressbar"
-                      aria-valuenow={60}
-                      aria-valuemin={0}
-                      aria-valuemax={100}
-                      style={{ width: "60%" }}
-                    ></div>
-                  </div>
-                </div>
-              </div>
-              <div className="block">
-                <div className="block-header overflow-hidden">
-                  <h2
-                    className="block-title visibility-hidden"
-                    data-toggle="appear"
-                    data-className="animated fadeInDown"
-                  >
-                    DATA_STREAM
-                  </h2>
-                </div>
-                <div className="block-content">
-                  <div className="row items-push">
-                    <div
-                      className="col-xs-4 visibility-hidden"
-                      data-toggle="appear"
-                      data-className="animated fadeIn"
-                      data-timeout="100"
-                    >
-                      <div className="font-s12 text-white-op">AT1</div>
-                      <div
-                        className="font-s18 text-success"
-                        data-toggle="countTo"
-                        data-to="148"
-                        data-speed="4000"
-                      ></div>
-                    </div>
-                    <div
-                      className="col-xs-4 visibility-hidden"
-                      data-toggle="appear"
-                      data-className="animated fadeIn"
-                      data-timeout="300"
-                    >
-                      <div className="font-s12 text-white-op">SR1</div>
-                      <div
-                        className="font-s18 text-success"
-                        data-toggle="countTo"
-                        data-to="30"
-                        data-speed="4000"
-                      ></div>
-                    </div>
-                    <div
-                      className="col-xs-4 visibility-hidden"
-                      data-toggle="appear"
-                      data-className="animated fadeIn"
-                      data-timeout="500"
-                    >
-                      <div className="font-s12 text-white-op">AF1</div>
-                      <div
-                        className="font-s18 text-success"
-                        data-toggle="countTo"
-                        data-to="123"
-                        data-speed="4000"
-                      ></div>
-                    </div>
-                    <div
-                      className="col-xs-4 visibility-hidden"
-                      data-toggle="appear"
-                      data-className="animated fadeIn"
-                      data-timeout="700"
-                    >
-                      <div className="font-s12 text-white-op">AT2</div>
-                      <div
-                        className="font-s18 text-success"
-                        data-toggle="countTo"
-                        data-to="180"
-                        data-speed="4000"
-                      ></div>
-                    </div>
-                    <div
-                      className="col-xs-4 visibility-hidden"
-                      data-toggle="appear"
-                      data-className="animated fadeIn"
-                      data-timeout="900"
-                    >
-                      <div className="font-s12 text-white-op">SR2</div>
-                      <div
-                        className="font-s18 text-success"
-                        data-toggle="countTo"
-                        data-to="680"
-                        data-speed="4000"
-                      ></div>
-                    </div>
-                    <div
-                      className="col-xs-4 visibility-hidden"
-                      data-toggle="appear"
-                      data-className="animated fadeIn"
-                      data-timeout="1100"
-                    >
-                      <div className="font-s12 text-white-op">AF2</div>
-                      <div
-                        className="font-s18 text-success"
-                        data-toggle="countTo"
-                        data-to="15"
-                        data-speed="4000"
-                      ></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <BorrowDepositVolume />
+              <MostBorrowedAsset />
             </div>
           </div>
         </main>

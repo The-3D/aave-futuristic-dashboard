@@ -134,7 +134,7 @@ const GlobalMarketData = () => {
               data-timeout="1200"
             >
               <span className="circle circle-over-1 hidden-xs">
-                <CountUp end={445} separator=" "></CountUp>
+                {/*<CountUp end={445} separator=" "></CountUp>*/}
               </span>
               <span className="circle circle-over-2 hidden-xs"></span>
               <span className="circle circle-over-3 hidden-xs"></span>

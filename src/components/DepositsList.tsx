@@ -1,6 +1,6 @@
 import React from "react";
 import ListBlockItem from "./ListBlockItem";
-import ListBlock from "./ListBlock";
+import Block from "./Block";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
 import Loader from "react-loader-spinner";
@@ -23,7 +23,7 @@ const depositsQuery = gql`
 
 const DepositsList = () => {
   return (
-    <ListBlock title="LAST DEPOSITS">
+    <Block title="LAST DEPOSITS">
       <Query query={depositsQuery}>
         {({ loading, error, data }: any) => {
           if (loading) return <div style={{textAlign:"center"}}><Loader type="Oval" color="#FFFFFF" width={32}></Loader></div>;
@@ -40,7 +40,7 @@ const DepositsList = () => {
           });
         }}
       </Query>
-    </ListBlock>
+    </Block>
   );
 };
 
